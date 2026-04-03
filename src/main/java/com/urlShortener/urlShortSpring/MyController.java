@@ -24,7 +24,7 @@ public class MyController {
         return service.shortenURL(request.getOriginalUrl());
     }
 
-    @GetMapping("/{code}")
+    @GetMapping("/{code:[a-zA-Z0-9]+}")
     public void redirect(@PathVariable String code, HttpServletResponse response) throws IOException {
         String originalUrl = service.getOriginalUrl(code);
 
