@@ -36,7 +36,7 @@ public class MyController {
     }
 
     @GetMapping("/")
-    public String home() {
-        return "I am working";
+    public void home(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/index.html");
     }
 }
