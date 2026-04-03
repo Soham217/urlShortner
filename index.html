@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            width: 400px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        a {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>URL Shortener</h2>
+
+    <input type="text" id="urlInput" placeholder="Enter long URL here" />
+    <br>
+    <button onclick="shortenUrl()">Shorten</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function shortenUrl() {
+        const url = document.getElementById("urlInput").value;
+
+        if (!url) {
+            alert("Please enter a URL");
+            return;
+        }
+
+        fetch("http://localhost:8080/shorten", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                originalUrl: url
+            })
+        })
+        .then(response => response.text())
+        .then(code => {
+            const shortUrl = "http://localhost:8080/" + code;
+
+            document.getElementById("result").innerHTML =
+                `Short URL: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Something went wrong!");
+        });
+    }
+</script>
+
+</body>
+</html>
