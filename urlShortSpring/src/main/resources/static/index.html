@@ -69,7 +69,7 @@
             return;
         }
 
-        fetch("http://localhost:8080/shorten", {
+        fetch("https://urlshortner-production-b3e9.up.railway.app/shorten", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -80,7 +80,7 @@
         })
         .then(response => response.text())
         .then(code => {
-            const shortUrl = "http://localhost:8080/" + code;
+            const shortUrl = "https://urlshortner-production-b3e9.up.railway.app/" + code;
 
             document.getElementById("result").innerHTML =
                 `Short URL: <a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
