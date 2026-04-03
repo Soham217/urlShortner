@@ -10,8 +10,4 @@ import lombok.Data;
 @Component
 public class UrlRequest {
     private String originalUrl;
-
-    public String getOriginalUrl() {
-        return originalUrl;
-    }
 }
